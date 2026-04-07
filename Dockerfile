@@ -10,6 +10,8 @@ FROM eclipse-temurin:17
 
 WORKDIR /app
 
-COPY --from=build /app/target/DdosAttack-0.0.1-SNAPSHOT.jar app.jar
+# 🔥 Copy ALL jars (no name issue)
+COPY --from=build /app/target /app/target
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+# 🔥 Run jar dynamically
+CMD ["sh", "-c", "java -jar /app/target/*.jar"]
